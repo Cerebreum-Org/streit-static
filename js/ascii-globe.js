@@ -13,48 +13,16 @@
         return;
       }
       c.style.position = 'relative';
-      c.style.left = 'auto';
+      c.style.left = '50%';
       c.style.top = 'auto';
-      c.style.transform = 'none';
-      c.style.width = '100%';
-      c.style.maxWidth = '340px';
-      c.style.height = '240px';
-      c.style.margin = '10px auto';
-      c.style.overflow = 'hidden';
-      c.style.borderRadius = '50%';
+      c.style.transform = 'translateX(-50%)';
+      c.style.margin = '-10px 0 -220px 0';
       c.style.opacity = '0.5';
-      var pre = c.querySelector('pre');
-      if (pre) {
-        var pw = pre.offsetWidth;
-        var ph = pre.offsetHeight;
-        pre.style.position = 'relative';
-        pre.style.left = Math.round((340 - pw) / 2) + 'px';
-        pre.style.top = Math.round((240 - ph) / 2) + 'px';
-      }
-      // Position ring as sibling after globe, overlapping it
-      var ring = document.getElementById('ascii-ring-hero');
-      if (ring && c.parentElement) {
-        c.parentElement.insertBefore(ring, c.nextSibling.nextSibling);
-        ring.style.position = 'relative';
-        ring.style.left = '50%';
-        ring.style.top = 'auto';
-        ring.style.transform = 'translateX(-50%) scale(0.45)';
-        ring.style.transformOrigin = 'top center';
-        ring.style.marginTop = '-260px';
-        ring.style.marginBottom = '-180px';
-        ring.style.display = 'block';
-        ring.style.opacity = '0.4';
-        ring.style.pointerEvents = 'none';
-        ring.style.width = 'fit-content';
-      }
-      // Fix gradient not covering partners on mobile
+      // Fix gradient on mobile
       var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
-      if (grad) {
-        grad.style.bottom = '35%';
-      }
+      if (grad) grad.style.bottom = '35%';
     }, 2000);
   }
-})();
 // ASCII Globe — rotating Earth with dense neon-glow characters
 // Vibrant cyberpunk palette: cyan oceans, lime/yellow land, white highlights
 // Dense character packing, text-shadow glow, atmosphere rim
