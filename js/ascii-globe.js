@@ -581,6 +581,17 @@ if (window.innerWidth <= 767) {
         container.style.cssText = 'position:relative;left:50%;top:auto;transform:translateX(-50%);margin:-10px 0 -220px 0;opacity:0.5;display:block;pointer-events:none;will-change:auto';
         if (ringContainer) ringContainer.style.display = 'none';
         container.dataset.mobileFixed = 'true';
+        // Center the globe ASCII art within the visible area
+        setTimeout(function() {
+          var pre = container.querySelector('pre');
+          if (pre) {
+            var preW = pre.offsetWidth;
+            var containerW = container.offsetWidth;
+            // Shift pre left so the globe center aligns with container center
+            pre.style.position = 'relative';
+            pre.style.left = ((containerW - preW) / 2) + 'px';
+          }
+        }, 200);
       } else {
         // Desktop: absolute position
         var leftPos = Math.round(78 - t * 3);
