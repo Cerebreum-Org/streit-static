@@ -548,7 +548,8 @@
       var cols = Math.round(targetWidth / (fontSize * 0.6));
       var rows = Math.round(cols * 0.42);
       var isMobile = vw < 640;
-      var leftPos = isMobile ? 100 : Math.round(78 - t * 3); // partially off-screen right on mobile, 78→75% on desktop
+      if (isMobile) { targetWidth = vw * 0.75; fontSize = Math.max(7, Math.round(vw / 100)); cols = Math.round(targetWidth / (fontSize * 0.6)); rows = Math.round(cols * 0.42); }
+      var leftPos = isMobile ? 50 : Math.round(78 - t * 3); // partially off-screen right on mobile, 78→75% on desktop
       var topPos = isMobile ? '45%' : '50%';
       var opacity = '0.6';
       
@@ -558,15 +559,7 @@
       container.style.top = topPos;
       container.style.opacity = opacity;
       if (window.innerWidth <= 767) {
-        container.style.position = 'relative';
-        container.style.left = 'auto';
-        container.style.top = 'auto';
-        container.style.transform = 'scale(0.45)';
-        container.style.transformOrigin = 'center center';
-        container.style.margin = '0 auto';
-        container.style.height = '200px';
-        container.style.overflow = 'hidden';
-        container.style.width = '300px';
+        // mobile positioning handled by updateHeroGlobeSize
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
         if (pre) {
