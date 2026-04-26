@@ -556,7 +556,7 @@
         container.style.top = 'auto';
         container.style.transform = 'translateX(-50%) scale(0.65)';
         container.style.transformOrigin = 'top center';
-        container.style.margin = '-20px 0 -100px 0';
+        container.style.margin = '10px 0 -80px 0';
         container.style.height = '200px';
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
