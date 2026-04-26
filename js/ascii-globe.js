@@ -559,7 +559,26 @@
       container.style.top = topPos;
       container.style.opacity = opacity;
       if (window.innerWidth <= 767) {
-        // mobile positioning handled by updateHeroGlobeSize
+        container.style.position = 'relative';
+        container.style.left = 'auto';
+        container.style.top = 'auto';
+        container.style.transform = 'none';
+        container.style.margin = '10px auto -60px auto';
+        container.style.width = '300px';
+        container.style.height = '220px';
+        container.style.overflow = 'hidden';
+        container.style.opacity = '0.6';
+        // Center the pre element within the clipped container
+        setTimeout(function() {
+          var pre = container.querySelector('pre');
+          if (pre) {
+            var preW = pre.offsetWidth;
+            var preH = pre.offsetHeight;
+            pre.style.position = 'relative';
+            pre.style.left = ((300 - preW) / 2) + 'px';
+            pre.style.top = ((220 - preH) / 2) + 'px';
+          }
+        }, 500);
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
         if (pre) {
