@@ -31,6 +31,21 @@
         pre.style.left = Math.round((340 - pw) / 2) + 'px';
         pre.style.top = Math.round((240 - ph) / 2) + 'px';
       }
+      // Move ring inside globe container so it clips together
+      var ring = document.getElementById('ascii-ring-hero');
+      if (ring) {
+        c.appendChild(ring);
+        ring.style.position = 'absolute';
+        ring.style.left = '50%';
+        ring.style.top = '50%';
+        ring.style.transform = 'translate(-50%,-50%)';
+        ring.style.display = 'block';
+      }
+      // Fix gradient not covering partners on mobile
+      var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
+      if (grad) {
+        grad.style.bottom = '35%';
+      }
     }, 2000);
   }
 })();
@@ -624,7 +639,7 @@
         ringContainer.style.top = topPos;
         ringContainer.style.opacity = opacity;
         if (window.innerWidth <= 767) {
-          ringContainer.style.display = 'none';
+          // Keep ring visible, will be clipped with globe
         }
       }
       return { cols: cols, rows: rows };
