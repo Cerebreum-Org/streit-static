@@ -31,15 +31,21 @@
         pre.style.left = Math.round((340 - pw) / 2) + 'px';
         pre.style.top = Math.round((240 - ph) / 2) + 'px';
       }
-      // Move ring inside globe container so it clips together
+      // Position ring as sibling after globe, overlapping it
       var ring = document.getElementById('ascii-ring-hero');
-      if (ring) {
-        c.appendChild(ring);
-        ring.style.position = 'absolute';
+      if (ring && c.parentElement) {
+        c.parentElement.insertBefore(ring, c.nextSibling.nextSibling);
+        ring.style.position = 'relative';
         ring.style.left = '50%';
-        ring.style.top = '50%';
-        ring.style.transform = 'translate(-50%,-50%)';
+        ring.style.top = 'auto';
+        ring.style.transform = 'translateX(-50%) scale(0.45)';
+        ring.style.transformOrigin = 'top center';
+        ring.style.marginTop = '-260px';
+        ring.style.marginBottom = '-180px';
         ring.style.display = 'block';
+        ring.style.opacity = '0.4';
+        ring.style.pointerEvents = 'none';
+        ring.style.width = 'fit-content';
       }
       // Fix gradient not covering partners on mobile
       var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
