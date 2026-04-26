@@ -559,13 +559,7 @@
         container.style.width = '280px';
         container.style.height = '280px';
         container.style.overflow = 'hidden';
-        container.style.display = 'flex';
-        container.style.alignItems = 'center';
-        container.style.justifyContent = 'center';
-        if (preEl) {
-          preEl.style.transform = 'scale(0.45)';
-          preEl.style.transformOrigin = 'center center';
-        }
+        container.style.borderRadius = '50%';
       }
       if (ringPreEl) {
         ringPreEl.style.fontSize = fontSize + 'px';
