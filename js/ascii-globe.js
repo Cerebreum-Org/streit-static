@@ -555,9 +555,17 @@
         container.style.left = 'auto';
         container.style.top = 'auto';
         container.style.transform = 'none';
-        container.style.margin = '24px auto';
+        container.style.margin = '16px auto';
         container.style.width = '280px';
         container.style.height = '280px';
+        container.style.overflow = 'hidden';
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.justifyContent = 'center';
+        if (preEl) {
+          preEl.style.transform = 'scale(0.45)';
+          preEl.style.transformOrigin = 'center center';
+        }
       }
       if (ringPreEl) {
         ringPreEl.style.fontSize = fontSize + 'px';
