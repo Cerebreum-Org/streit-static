@@ -562,8 +562,8 @@ if (window.innerWidth <= 767) {
       if (isMobile && container.dataset.mobileFixed === 'true') return;
       
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
-      var targetWidth = isMobile ? vw * 0.75 : vw * 0.40;
-      var fontSize = isMobile ? Math.max(7, Math.round(vw / 100)) : Math.max(6, Math.round(vw / 192));
+      var targetWidth = isMobile ? 180 : vw * 0.40;
+      var fontSize = isMobile ? 4 : Math.max(6, Math.round(vw / 192));
       var cols = Math.round(targetWidth / (fontSize * 0.6));
       var rows = Math.round(cols * 0.42);
       
