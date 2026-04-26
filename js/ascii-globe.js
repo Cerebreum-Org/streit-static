@@ -552,13 +552,12 @@
       container.style.opacity = opacity;
       if (window.innerWidth <= 767) {
         container.style.position = 'relative';
-        container.style.left = '50%';
+        container.style.left = 'auto';
         container.style.top = 'auto';
-        container.style.transform = 'translateX(-50%)';
-        container.style.margin = '16px 0';
-        container.style.width = '280px';
-        container.style.height = '280px';
-        container.style.overflow = 'hidden';
+        container.style.transform = 'scale(0.38)';
+        container.style.transformOrigin = 'top center';
+        container.style.margin = '0 auto';
+        container.style.height = '200px';
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
         if (pre) {
