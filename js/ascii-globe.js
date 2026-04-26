@@ -582,16 +582,16 @@ if (window.innerWidth <= 767) {
         if (ringContainer) ringContainer.style.display = 'none';
         container.dataset.mobileFixed = 'true';
         // Center the globe ASCII art within the visible area
-        setTimeout(function() {
-          var pre = container.querySelector('pre');
-          if (pre) {
-            var preW = pre.offsetWidth;
-            var containerW = container.offsetWidth;
-            // Shift pre left so the globe center aligns with container center
-            pre.style.position = 'relative';
-            pre.style.left = ((containerW - preW) / 2) + 'px';
-          }
-        }, 200);
+        setTimeout(function centerGlobe() {
+          var p = document.getElementById('ascii-globe-hero');
+          if (!p) return;
+          var pre = p.querySelector('pre');
+          if (!pre || pre.offsetWidth < 100) { setTimeout(centerGlobe, 300); return; }
+          var pw = pre.offsetWidth;
+          var cw = p.offsetWidth || 350;
+          pre.style.position = 'relative';
+          pre.style.left = Math.round((cw - pw) / 2) + 'px';
+        }, 500);
       } else {
         // Desktop: absolute position
         var leftPos = Math.round(78 - t * 3);
