@@ -558,8 +558,12 @@
         container.style.margin = '16px auto';
         container.style.width = '280px';
         container.style.height = '280px';
-        container.style.overflow = 'hidden';
-        container.style.borderRadius = '50%';
+        container.style.overflow = 'visible';
+        var pre = container.querySelector('pre');
+        if (pre) {
+          pre.style.fontSize = '6px';
+          pre.style.lineHeight = '7px';
+        }
       }
       if (ringPreEl) {
         ringPreEl.style.fontSize = fontSize + 'px';
