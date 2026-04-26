@@ -578,7 +578,7 @@ if (window.innerWidth <= 767) {
         // Mobile: relative position, centered, after CTA
         var cta = document.querySelector('.sc-hero-cta');
         if (cta) cta.after(container);
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:20px auto -150px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:100%;max-width:350px;height:280px';
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:20px auto -150px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:320px;height:320px;border-radius:50%';
         if (ringContainer) ringContainer.style.display = 'none';
         container.dataset.mobileFixed = 'true';
         // Center the globe ASCII art within the visible area
