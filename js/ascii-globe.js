@@ -578,7 +578,7 @@ if (window.innerWidth <= 767) {
         // Mobile: relative position, centered, after CTA
         var cta = document.querySelector('.sc-hero-cta');
         if (cta) cta.after(container);
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto -100px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:320px;height:320px;border-radius:50%';
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:40px auto -60px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:240px;height:240px;border-radius:50%';
         if (ringContainer) ringContainer.style.display = 'none';
         container.dataset.mobileFixed = 'true';
         // Center the globe ASCII art within the visible area
@@ -588,11 +588,11 @@ if (window.innerWidth <= 767) {
           var pre = p.querySelector('pre');
           if (!pre || pre.offsetWidth < 100) { setTimeout(centerGlobe, 300); return; }
           var pw = pre.offsetWidth;
-          var cw = p.offsetWidth || 350;
+          var cw = p.offsetWidth || 240;
           pre.style.position = 'relative';
           pre.style.left = Math.round((cw - pw) / 2) + 'px';
           var ph = pre.offsetHeight;
-          pre.style.top = Math.round((280 - ph) / 2) + 'px';
+          pre.style.top = Math.round((240 - ph) / 2) + 'px';
         }, 500);
       } else {
         // Desktop: absolute position
