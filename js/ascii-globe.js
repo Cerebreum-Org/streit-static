@@ -552,11 +552,11 @@
       container.style.opacity = opacity;
       if (window.innerWidth <= 767) {
         container.style.position = 'relative';
-        container.style.left = 'auto';
+        container.style.left = '50%';
         container.style.top = 'auto';
-        container.style.transform = 'scale(0.38)';
+        container.style.transform = 'translateX(-50%) scale(0.4)';
         container.style.transformOrigin = 'top center';
-        container.style.margin = '0 auto';
+        container.style.margin = '-20px 0 -120px 0';
         container.style.height = '200px';
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
