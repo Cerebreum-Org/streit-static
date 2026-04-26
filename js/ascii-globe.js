@@ -537,7 +537,7 @@
     // Scale globe based on viewport width
     // Dynamic globe sizing based on viewport width
     function updateHeroGlobeSize() {
-      var vw = window.innerWidth <= 767 ? 280 : window.innerWidth;
+      var vw = window.innerWidth;
       // Linear interpolation: 375px → 40 cols, 1440px → 120 cols
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
       // Scale globe to maintain ~40% viewport width at all sizes
@@ -561,9 +561,9 @@
         container.style.position = 'relative';
         container.style.left = '50%';
         container.style.top = 'auto';
-        container.style.transform = 'translateX(-50%) scale(0.5)';
+        container.style.transform = 'translateX(-50%) scale(0.55)';
         container.style.transformOrigin = 'top center';
-        container.style.margin = '-40px 0 -180px 0';
+        container.style.margin = '-20px 0 -200px 0';
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
         if (pre) {
