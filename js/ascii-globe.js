@@ -580,6 +580,21 @@ if (window.innerWidth <= 767) {
       container.style.opacity = opacity;
       if (window.innerWidth <= 767) {
         container.style.position = 'relative';
+        container.style.left = '50%';
+        container.style.top = 'auto';
+        container.style.transform = 'translateX(-50%)';
+        container.style.margin = '-10px 0 -220px 0';
+        container.style.opacity = '0.5';
+        container.style.display = 'block';
+        // Move after CTA if not already there
+        var cta = document.querySelector('.sc-hero-cta');
+        if (cta && container.parentElement !== cta.parentElement) {
+          cta.after(container);
+        }
+        __mobileFixed = true;
+      }
+      if (window.innerWidth <= 767) {
+        container.style.position = 'relative';
         container.style.left = 'auto';
         container.style.top = 'auto';
         container.style.transform = 'none';
