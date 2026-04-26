@@ -1,28 +1,28 @@
 
-// Inject mobile fixes
-(function(){
-  var s = document.createElement('style');
-  s.textContent = '.sc-hamburger{background:none!important;border:none!important;padding:8px!important;cursor:pointer}.sc-hamburger svg{width:24px;height:24px;stroke:#0b1023}';
-  document.head.appendChild(s);
-  // Final mobile override - runs after all other sizing functions
-  if (window.innerWidth <= 767) {
-    setTimeout(function mobileFixup() {
-      var c = document.getElementById('ascii-globe-hero');
-      if (!c || !c.querySelector('pre')) {
-        setTimeout(mobileFixup, 500);
-        return;
-      }
-      c.style.position = 'relative';
-      c.style.left = '50%';
-      c.style.top = 'auto';
-      c.style.transform = 'translateX(-50%)';
-      c.style.margin = '-10px 0 -220px 0';
-      c.style.opacity = '0.5';
-      // Fix gradient on mobile
-      var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
-      if (grad) grad.style.bottom = '35%';
-    }, 2000);
-  }
+// Inject hamburger CSS fix
+(function(){ var s=document.createElement('style'); s.textContent='.sc-hamburger{background:transparent!important;border:none!important}'; document.head.appendChild(s); })();
+
+// Final mobile override - element is hidden via CSS until positioned
+if (window.innerWidth <= 767) {
+  var mfTimer = setInterval(function() {
+    var c = document.getElementById('ascii-globe-hero');
+    var cta = document.querySelector('.sc-hero-cta');
+    if (!c || !cta || !c.querySelector('pre')) return;
+    clearInterval(mfTimer);
+    // Move into content flow after CTA
+    cta.after(c);
+    // Position and show in one frame
+    c.style.cssText = 'position:relative;left:50%;top:auto;transform:translateX(-50%);margin:-10px 0 -220px 0;opacity:0.5;display:block!important';
+    // Also fix ring
+    var ring = document.getElementById('ascii-ring-hero');
+    if (ring) ring.style.display = 'none';
+    // Fix gradient
+    var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
+    if (grad) grad.style.bottom = '35%';
+  }, 300);
+  setTimeout(function(){ clearInterval(mfTimer); }, 15000);
+}
+
 // ASCII Globe — rotating Earth with dense neon-glow characters
 // Vibrant cyberpunk palette: cyan oceans, lime/yellow land, white highlights
 // Dense character packing, text-shadow glow, atmosphere rim
