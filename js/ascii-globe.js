@@ -530,7 +530,7 @@
     // Scale globe based on viewport width
     // Dynamic globe sizing based on viewport width
     function updateHeroGlobeSize() {
-      var vw = window.innerWidth <= 767 ? 500 : window.innerWidth;
+      var vw = window.innerWidth <= 767 ? 280 : window.innerWidth;
       // Linear interpolation: 375px → 40 cols, 1440px → 120 cols
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
       // Scale globe to maintain ~40% viewport width at all sizes
