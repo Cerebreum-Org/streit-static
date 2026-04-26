@@ -554,7 +554,7 @@ if (window.innerWidth <= 767) {
 
     // Scale globe based on viewport width
     // Dynamic globe sizing based on viewport width
-    var __mobileFixed = false;
+    var __mobileFixed = (window.innerWidth <= 767);
     function updateHeroGlobeSize() {
       if (__mobileFixed) return;
       var vw = window.innerWidth;
