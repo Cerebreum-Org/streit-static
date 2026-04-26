@@ -1,3 +1,10 @@
+
+// Inject mobile fixes
+(function(){
+  var s = document.createElement('style');
+  s.textContent = '.sc-hamburger{background:none!important;border:none!important;padding:8px!important;cursor:pointer}.sc-hamburger svg{width:24px;height:24px;stroke:#0b1023}';
+  document.head.appendChild(s);
+})();
 // ASCII Globe — rotating Earth with dense neon-glow characters
 // Vibrant cyberpunk palette: cyan oceans, lime/yellow land, white highlights
 // Dense character packing, text-shadow glow, atmosphere rim
