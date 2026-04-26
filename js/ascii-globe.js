@@ -554,87 +554,46 @@ if (window.innerWidth <= 767) {
 
     // Scale globe based on viewport width
     // Dynamic globe sizing based on viewport width
-    var __mobileFixed = false;
-    var __mobileRenderCount = 0;
     function updateHeroGlobeSize() {
-      if (__mobileFixed && __mobileRenderCount > 0) return;
-      __mobileRenderCount++;
       var vw = window.innerWidth;
-      // Linear interpolation: 375px → 40 cols, 1440px → 120 cols
+      var isMobile = vw <= 767;
+      
+      // On mobile after first render, skip all repositioning
+      if (isMobile && container.dataset.mobileFixed === 'true') return;
+      
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
-      // Scale globe to maintain ~40% viewport width at all sizes
-      // target: globe pixel width = vw * 0.40
-      // globe pixel width = cols * fontSize * 0.6 (char width ≈ 0.6 * fontSize)
-      var targetWidth = vw * 0.40;
-      var fontSize = Math.max(6, Math.round(vw / 192)); // scales with viewport
+      var targetWidth = isMobile ? vw * 0.75 : vw * 0.40;
+      var fontSize = isMobile ? Math.max(7, Math.round(vw / 100)) : Math.max(6, Math.round(vw / 192));
       var cols = Math.round(targetWidth / (fontSize * 0.6));
       var rows = Math.round(cols * 0.42);
-      var isMobile = vw < 640;
-      if (isMobile) { targetWidth = vw * 0.75; fontSize = Math.max(7, Math.round(vw / 100)); cols = Math.round(targetWidth / (fontSize * 0.6)); rows = Math.round(cols * 0.42); }
-      var leftPos = isMobile ? 50 : Math.round(78 - t * 3); // partially off-screen right on mobile, 78→75% on desktop
-      var topPos = isMobile ? '45%' : '50%';
-      var opacity = '0.6';
       
       preEl.style.fontSize = fontSize + 'px';
       preEl.style.lineHeight = (fontSize + 2) + 'px';
-      container.style.left = leftPos + '%';
-      container.style.top = topPos;
-      container.style.opacity = opacity;
-      if (window.innerWidth <= 767) {
-        container.style.position = 'relative';
-        container.style.left = '50%';
-        container.style.top = 'auto';
-        container.style.transform = 'translateX(-50%)';
-        container.style.margin = '-10px 0 -220px 0';
-        container.style.opacity = '0.5';
-        container.style.display = 'block';
-        // Move after CTA if not already there
-        var cta = document.querySelector('.sc-hero-cta');
-        if (cta && container.parentElement !== cta.parentElement) {
-          cta.after(container);
-        }
-        __mobileFixed = true;
-      }
-      if (window.innerWidth <= 767) {
-        container.style.position = 'relative';
-        container.style.left = 'auto';
-        container.style.top = 'auto';
-        container.style.transform = 'none';
-        container.style.margin = '10px auto -60px auto';
-        container.style.width = '300px';
-        container.style.height = '220px';
-        container.style.overflow = 'hidden';
-        container.style.opacity = '0.6';
-        // Center the pre element within the clipped container
-        setTimeout(function() {
-          var pre = container.querySelector('pre');
-          if (pre) {
-            var preW = pre.offsetWidth;
-            var preH = pre.offsetHeight;
-            pre.style.position = 'relative';
-            pre.style.left = ((300 - preW) / 2) + 'px';
-            pre.style.top = ((220 - preH) / 2) + 'px';
-          }
-        }, 500);
-        container.style.overflow = 'visible';
-        var pre = container.querySelector('pre');
-        if (pre) {
-          pre.style.fontSize = '6px';
-          pre.style.lineHeight = '7px';
-        }
-      }
       if (ringPreEl) {
         ringPreEl.style.fontSize = fontSize + 'px';
         ringPreEl.style.lineHeight = (fontSize + 2) + 'px';
       }
-      if (ringContainer) {
-        ringContainer.style.left = leftPos + '%';
-        ringContainer.style.top = topPos;
-        ringContainer.style.opacity = opacity;
-        if (window.innerWidth <= 767) {
-          // Keep ring visible, will be clipped with globe
+      
+      if (isMobile) {
+        // Mobile: relative position, centered, after CTA
+        var cta = document.querySelector('.sc-hero-cta');
+        if (cta) cta.after(container);
+        container.style.cssText = 'position:relative;left:50%;top:auto;transform:translateX(-50%);margin:-10px 0 -220px 0;opacity:0.5;display:block;pointer-events:none;will-change:auto';
+        if (ringContainer) ringContainer.style.display = 'none';
+        container.dataset.mobileFixed = 'true';
+      } else {
+        // Desktop: absolute position
+        var leftPos = Math.round(78 - t * 3);
+        container.style.left = leftPos + '%';
+        container.style.top = '50%';
+        container.style.opacity = '0.6';
+        if (ringContainer) {
+          ringContainer.style.left = leftPos + '%';
+          ringContainer.style.top = '50%';
+          ringContainer.style.opacity = '0.6';
         }
       }
+      
       return { cols: cols, rows: rows };
     }
     var heroSize = updateHeroGlobeSize();
