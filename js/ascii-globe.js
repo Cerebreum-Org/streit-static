@@ -4,6 +4,35 @@
   var s = document.createElement('style');
   s.textContent = '.sc-hamburger{background:none!important;border:none!important;padding:8px!important;cursor:pointer}.sc-hamburger svg{width:24px;height:24px;stroke:#0b1023}';
   document.head.appendChild(s);
+  // Final mobile override - runs after all other sizing functions
+  if (window.innerWidth <= 767) {
+    setTimeout(function mobileFixup() {
+      var c = document.getElementById('ascii-globe-hero');
+      if (!c || !c.querySelector('pre')) {
+        setTimeout(mobileFixup, 500);
+        return;
+      }
+      c.style.position = 'relative';
+      c.style.left = 'auto';
+      c.style.top = 'auto';
+      c.style.transform = 'none';
+      c.style.width = '100%';
+      c.style.maxWidth = '340px';
+      c.style.height = '240px';
+      c.style.margin = '10px auto';
+      c.style.overflow = 'hidden';
+      c.style.borderRadius = '50%';
+      c.style.opacity = '0.5';
+      var pre = c.querySelector('pre');
+      if (pre) {
+        var pw = pre.offsetWidth;
+        var ph = pre.offsetHeight;
+        pre.style.position = 'relative';
+        pre.style.left = Math.round((340 - pw) / 2) + 'px';
+        pre.style.top = Math.round((240 - ph) / 2) + 'px';
+      }
+    }, 2000);
+  }
 })();
 // ASCII Globe — rotating Earth with dense neon-glow characters
 // Vibrant cyberpunk palette: cyan oceans, lime/yellow land, white highlights
