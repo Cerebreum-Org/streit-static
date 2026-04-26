@@ -554,9 +554,9 @@
         container.style.position = 'relative';
         container.style.left = '50%';
         container.style.top = 'auto';
-        container.style.transform = 'translateX(-50%) scale(0.4)';
+        container.style.transform = 'translateX(-50%) scale(0.65)';
         container.style.transformOrigin = 'top center';
-        container.style.margin = '-20px 0 -120px 0';
+        container.style.margin = '-20px 0 -100px 0';
         container.style.height = '200px';
         container.style.overflow = 'visible';
         var pre = container.querySelector('pre');
