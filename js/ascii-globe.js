@@ -592,7 +592,7 @@ if (window.innerWidth <= 767) {
         // Show ring inside globe container on mobile
         if (ringContainer) {
           container.appendChild(ringContainer);
-          ringContainer.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;opacity:0.4;pointer-events:none;z-index:2';
+          ringContainer.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;opacity:0.7;pointer-events:none;z-index:2';
           if (ringPreEl) {
             ringPreEl.style.fontSize = fontSize + 'px';
             ringPreEl.style.lineHeight = (fontSize + 2) + 'px';
