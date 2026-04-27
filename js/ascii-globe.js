@@ -15,7 +15,7 @@ if (window.innerWidth <= 767) {
     c.style.cssText = 'position:relative;left:50%;top:auto;transform:translateX(-50%);margin:-10px 0 -220px 0;opacity:0.5;display:block!important';
     // Also fix ring
     var ring = document.getElementById('ascii-ring-hero');
-    if (ring) ring.style.display = 'none';
+    // ring hidden via CSS media query on mobile
     // Fix gradient
     var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
     if (grad) grad.style.bottom = '35%';
@@ -602,7 +602,7 @@ if (window.innerWidth <= 767) {
         var cta = document.querySelector('.sc-hero-cta');
         if (cta) cta.after(container);
         container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:40px auto -60px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:240px;height:240px;border-radius:50%';
-        if (ringContainer) ringContainer.style.display = 'none';
+        // ring display handled by mobile fixup and desktop restore
         container.dataset.mobileFixed = 'true';
         // Center the globe ASCII art within the visible area
         setTimeout(function centerGlobe() {
