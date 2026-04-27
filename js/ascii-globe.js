@@ -565,10 +565,19 @@ if (window.innerWidth <= 767) {
         return;
       }
       if (!isMobile && container.dataset.mobileFixed === 'true') {
-        // Switching back to desktop — move globe back to hero section and clear flag
+        // Switching back to desktop — move globe AND ring back to hero section
         var hero = document.querySelector('.sc-hero-1');
-        if (hero && container.parentElement !== hero) {
-          hero.insertBefore(container, hero.firstChild);
+        if (hero) {
+          if (container.parentElement !== hero) {
+            hero.insertBefore(container, hero.firstChild);
+          }
+          // Restore ring to hero section too
+          if (ringContainer && ringContainer.parentElement !== hero) {
+            hero.insertBefore(ringContainer, container.nextSibling);
+            ringContainer.style.cssText = '';
+            var rp = ringContainer.querySelector('pre');
+            if (rp) { rp.style.position = ''; rp.style.left = ''; rp.style.top = ''; }
+          }
         }
         container.dataset.mobileFixed = '';
         container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
