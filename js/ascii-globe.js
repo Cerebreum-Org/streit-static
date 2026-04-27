@@ -577,6 +577,7 @@ if (window.innerWidth <= 767) {
             ringContainer.style.cssText = '';
             var rp = ringContainer.querySelector('pre');
             if (rp) { rp.style.position = ''; rp.style.left = ''; rp.style.top = ''; }
+            ringContainer.style.display = 'block';
           }
         }
         container.dataset.mobileFixed = '';
