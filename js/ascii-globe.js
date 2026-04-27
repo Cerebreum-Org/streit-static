@@ -580,69 +580,51 @@ if (window.innerWidth <= 767) {
       
       if (isMobile) {
         // === MOBILE MODE ===
-        if (_lastMode === 'mobile') return; // already set up, skip
+        if (_lastMode === 'mobile') return; // already set up
         
-        // Move globe after CTA
-        var cta = document.querySelector('.sc-hero-cta');
-        if (cta) cta.after(container);
-        
-        // Style globe container
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:15px auto 10px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:320px;height:280px';
-        
-        // Show ring inside globe container on mobile
-        if (ringContainer) {
-          container.appendChild(ringContainer);
-          ringContainer.style.cssText = 'position:absolute;left:0;top:0;transform:none;display:block;opacity:0.7;pointer-events:none;z-index:2;width:100%;height:100%';
-          if (ringPreEl) {
-            ringPreEl.style.fontSize = fontSize + 'px';
-            ringPreEl.style.lineHeight = (fontSize + 2) + 'px';
-          }
-          // Center the ring pre to match globe pre position
-          setTimeout(function() {
-            var gPre = container.querySelector('pre');
-            if (ringPreEl && gPre) {
-              ringPreEl.style.position = 'relative';
-              ringPreEl.style.left = gPre.style.left;
-              ringPreEl.style.top = gPre.style.top;
-            }
-          }, 800);
+        // Create a wrapper that holds both globe and ring
+        var wrapper = document.getElementById('ascii-mobile-wrapper');
+        if (!wrapper) {
+          wrapper = document.createElement('div');
+          wrapper.id = 'ascii-mobile-wrapper';
+          wrapper.style.cssText = 'position:relative;width:320px;height:280px;margin:15px auto 10px auto;overflow:hidden;opacity:0.5';
         }
         
-        // Center the pre element after render
-        setTimeout(function centerGlobe() {
-          var pre = container.querySelector('pre');
-          if (!pre || pre.offsetWidth < 100) { setTimeout(centerGlobe, 300); return; }
-          var pw = pre.offsetWidth;
-          var ph = pre.offsetHeight;
-          pre.style.position = 'relative';
-          pre.style.left = Math.round((320 - pw) / 2) + 'px';
-          pre.style.top = Math.round((280 - ph) / 2 - 10) + 'px';
-        }, 500);
+        // Move wrapper after CTA
+        var cta = document.querySelector('.sc-hero-cta');
+        if (cta) cta.after(wrapper);
+        
+        // Move both globe and ring into wrapper, keeping their relative positions
+        wrapper.appendChild(container);
+        if (ringContainer) wrapper.appendChild(ringContainer);
+        
+        // Style globe inside wrapper
+        container.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none';
+        
+        // Style ring inside wrapper — same position as globe
+        if (ringContainer) {
+          ringContainer.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);opacity:0.7;pointer-events:none;z-index:2';
+        }
         
       } else {
         // === DESKTOP MODE ===
         
         // If coming from mobile, restore DOM
         if (_lastMode === 'mobile') {
-          // Move globe back to hero section
-          if (_heroSection && container.parentElement !== _heroSection) {
+          // Remove wrapper and move elements back to hero
+          var wrapper = document.getElementById('ascii-mobile-wrapper');
+          if (_heroSection) {
             _heroSection.insertBefore(container, _heroSection.firstChild);
+            if (ringContainer) _heroSection.insertBefore(ringContainer, container.nextSibling);
           }
-          // Restore ring
-          if (ringContainer) {
-            if (ringContainer.parentElement !== _heroSection) {
-              _heroSection.insertBefore(ringContainer, container.nextSibling);
-            }
-            ringContainer.style.cssText = '';
-            var rp = ringContainer.querySelector('pre');
-            if (rp) { rp.style.position = ''; rp.style.left = ''; rp.style.top = ''; }
-          }
-          // Clear pre centering
+          if (wrapper) wrapper.remove();
+          // Clear mobile styles
+          container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
+          if (ringContainer) ringContainer.style.cssText = '';
           preEl.style.position = '';
           preEl.style.left = '';
           preEl.style.top = '';
-          // Reset container
-          container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
+          if (ringPreEl) { ringPreEl.style.position = ''; ringPreEl.style.left = ''; ringPreEl.style.top = ''; }
         }
         
         // Position globe and ring
