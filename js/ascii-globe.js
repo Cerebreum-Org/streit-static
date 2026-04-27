@@ -559,7 +559,11 @@ if (window.innerWidth <= 767) {
       var isMobile = vw <= 767;
       
       // On mobile after first render, skip all repositioning
-      if (isMobile && container.dataset.mobileFixed === 'true') return;
+      if (isMobile && container.dataset.mobileFixed === 'true') {
+        // Re-apply mobile styles on resize
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto 20px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:200px;height:200px;border-radius:50%';
+        return;
+      }
       
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
       var targetWidth = isMobile ? 180 : vw * 0.40;
