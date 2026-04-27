@@ -601,7 +601,7 @@ if (window.innerWidth <= 767) {
           pre.style.position = 'relative';
           pre.style.left = Math.round((cw - pw) / 2) + 'px';
           var ph = pre.offsetHeight;
-          pre.style.top = Math.round((240 - ph) / 2) + 'px';
+          pre.style.top = (Math.round((200 - ph) / 2) - 14) + 'px';
         }, 500);
       } else {
         // Desktop: absolute position
