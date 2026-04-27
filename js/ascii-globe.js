@@ -597,16 +597,15 @@ if (window.innerWidth <= 767) {
             ringPreEl.style.fontSize = fontSize + 'px';
             ringPreEl.style.lineHeight = (fontSize + 2) + 'px';
           }
-          // Center the ring pre after render
+          // Center the ring pre to match globe pre position
           setTimeout(function() {
-            if (ringPreEl) {
-              var rw = ringPreEl.offsetWidth;
-              var rh = ringPreEl.offsetHeight;
+            var gPre = container.querySelector('pre');
+            if (ringPreEl && gPre) {
               ringPreEl.style.position = 'relative';
-              ringPreEl.style.left = Math.round((320 - rw) / 2) + 'px';
-              ringPreEl.style.top = Math.round((280 - rh) / 2) + 'px';
+              ringPreEl.style.left = gPre.style.left;
+              ringPreEl.style.top = gPre.style.top;
             }
-          }, 600);
+          }, 800);
         }
         
         // Center the pre element after render
