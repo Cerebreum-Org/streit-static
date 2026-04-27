@@ -565,9 +565,13 @@ if (window.innerWidth <= 767) {
         return;
       }
       if (!isMobile && container.dataset.mobileFixed === 'true') {
-        // Switching back to desktop — clear mobile flag and restore absolute positioning
+        // Switching back to desktop — move globe back to hero section and clear flag
+        var hero = document.querySelector('.sc-hero-1');
+        if (hero && container.parentElement !== hero) {
+          hero.insertBefore(container, hero.firstChild);
+        }
         container.dataset.mobileFixed = '';
-        container.style.cssText = '';
+        container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
       }
       
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
