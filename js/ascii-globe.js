@@ -568,7 +568,7 @@
         if (!wrapper) {
           wrapper = document.createElement('div');
           wrapper.id = 'ascii-mobile-wrapper';
-          wrapper.style.cssText = 'position:relative;width:320px;height:280px;margin:15px auto 10px auto;overflow:hidden;opacity:0.5';
+          wrapper.style.cssText = 'position:relative;width:320px;height:280px;margin:15px auto 10px auto;overflow:hidden';
         }
         
         // Move wrapper after CTA
@@ -580,7 +580,7 @@
         if (ringContainer) wrapper.appendChild(ringContainer);
         
         // Style globe inside wrapper
-        container.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none';
+        container.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0.6';
         
         // Style ring inside wrapper — same position as globe
         if (ringContainer) {
