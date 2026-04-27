@@ -589,8 +589,25 @@ if (window.innerWidth <= 767) {
         // Style globe container
         container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto 20px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:200px;height:200px;border-radius:50%';
         
-        // Hide ring on mobile
-        if (ringContainer) ringContainer.style.display = 'none';
+        // Show ring inside globe container on mobile
+        if (ringContainer) {
+          container.appendChild(ringContainer);
+          ringContainer.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;opacity:0.4;pointer-events:none;z-index:2';
+          if (ringPreEl) {
+            ringPreEl.style.fontSize = fontSize + 'px';
+            ringPreEl.style.lineHeight = (fontSize + 2) + 'px';
+          }
+          // Center the ring pre after render
+          setTimeout(function() {
+            if (ringPreEl) {
+              var rw = ringPreEl.offsetWidth;
+              var rh = ringPreEl.offsetHeight;
+              ringPreEl.style.position = 'relative';
+              ringPreEl.style.left = Math.round((200 - rw) / 2) + 'px';
+              ringPreEl.style.top = Math.round((200 - rh) / 2) + 'px';
+            }
+          }, 600);
+        }
         
         // Center the pre element after render
         setTimeout(function centerGlobe() {
