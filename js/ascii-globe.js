@@ -568,7 +568,7 @@
         if (!wrapper) {
           wrapper = document.createElement('div');
           wrapper.id = 'ascii-mobile-wrapper';
-          wrapper.style.cssText = 'position:relative;width:320px;height:280px;margin:15px 0 10px auto;left:20%';
+          wrapper.style.cssText = 'position:relative;width:320px;height:280px;margin:15px 0 10px auto;left:25%';
         }
         
         // Move wrapper after CTA
