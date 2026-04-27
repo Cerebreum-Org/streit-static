@@ -554,42 +554,23 @@ if (window.innerWidth <= 767) {
 
     // Scale globe based on viewport width
     // Dynamic globe sizing based on viewport width
+    var _lastMode = null; // track desktop/mobile state
+    var _heroSection = container.parentElement; // save original parent
+    
     function updateHeroGlobeSize() {
       var vw = window.innerWidth;
       var isMobile = vw <= 767;
+      var currentMode = isMobile ? 'mobile' : 'desktop';
+      var modeChanged = _lastMode !== null && _lastMode !== currentMode;
       
-      // On mobile after first render, skip all repositioning
-      if (isMobile && container.dataset.mobileFixed === 'true') {
-        // Re-apply mobile styles on resize
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto 20px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:200px;height:200px;border-radius:50%';
-        return;
-      }
-      if (!isMobile && container.dataset.mobileFixed === 'true') {
-        // Switching back to desktop — move globe AND ring back to hero section
-        var hero = document.querySelector('.sc-hero-1');
-        if (hero) {
-          if (container.parentElement !== hero) {
-            hero.insertBefore(container, hero.firstChild);
-          }
-          // Restore ring to hero section too
-          if (ringContainer && ringContainer.parentElement !== hero) {
-            hero.insertBefore(ringContainer, container.nextSibling);
-            ringContainer.style.cssText = '';
-            var rp = ringContainer.querySelector('pre');
-            if (rp) { rp.style.position = ''; rp.style.left = ''; rp.style.top = ''; }
-            ringContainer.style.display = 'block';
-          }
-        }
-        container.dataset.mobileFixed = '';
-        container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
-      }
-      
+      // Calculate sizing
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
       var targetWidth = isMobile ? 180 : vw * 0.40;
       var fontSize = isMobile ? 4 : Math.max(6, Math.round(vw / 192));
       var cols = Math.round(targetWidth / (fontSize * 0.6));
       var rows = Math.round(cols * 0.42);
       
+      // Set font sizes
       preEl.style.fontSize = fontSize + 'px';
       preEl.style.lineHeight = (fontSize + 2) + 'px';
       if (ringPreEl) {
@@ -598,27 +579,57 @@ if (window.innerWidth <= 767) {
       }
       
       if (isMobile) {
-        // Mobile: relative position, centered, after CTA
+        // === MOBILE MODE ===
+        if (_lastMode === 'mobile') return; // already set up, skip
+        
+        // Move globe after CTA
         var cta = document.querySelector('.sc-hero-cta');
         if (cta) cta.after(container);
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:40px auto -60px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:240px;height:240px;border-radius:50%';
-        // ring display handled by mobile fixup and desktop restore
-        container.dataset.mobileFixed = 'true';
-        // Center the globe ASCII art within the visible area
+        
+        // Style globe container
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto 20px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:200px;height:200px;border-radius:50%';
+        
+        // Hide ring on mobile
+        if (ringContainer) ringContainer.style.display = 'none';
+        
+        // Center the pre element after render
         setTimeout(function centerGlobe() {
-          var p = document.getElementById('ascii-globe-hero');
-          if (!p) return;
-          var pre = p.querySelector('pre');
+          var pre = container.querySelector('pre');
           if (!pre || pre.offsetWidth < 100) { setTimeout(centerGlobe, 300); return; }
           var pw = pre.offsetWidth;
-          var cw = p.offsetWidth || 240;
-          pre.style.position = 'relative';
-          pre.style.left = Math.round((cw - pw) / 2) + 'px';
           var ph = pre.offsetHeight;
-          pre.style.top = (Math.round((200 - ph) / 2) - 14) + 'px';
+          pre.style.position = 'relative';
+          pre.style.left = Math.round((200 - pw) / 2) + 'px';
+          pre.style.top = Math.round((200 - ph) / 2 - 14) + 'px';
         }, 500);
+        
       } else {
-        // Desktop: absolute position
+        // === DESKTOP MODE ===
+        
+        // If coming from mobile, restore DOM
+        if (_lastMode === 'mobile') {
+          // Move globe back to hero section
+          if (_heroSection && container.parentElement !== _heroSection) {
+            _heroSection.insertBefore(container, _heroSection.firstChild);
+          }
+          // Restore ring
+          if (ringContainer) {
+            if (ringContainer.parentElement !== _heroSection) {
+              _heroSection.insertBefore(ringContainer, container.nextSibling);
+            }
+            ringContainer.style.cssText = '';
+            var rp = ringContainer.querySelector('pre');
+            if (rp) { rp.style.position = ''; rp.style.left = ''; rp.style.top = ''; }
+          }
+          // Clear pre centering
+          preEl.style.position = '';
+          preEl.style.left = '';
+          preEl.style.top = '';
+          // Reset container
+          container.style.cssText = 'position:absolute;pointer-events:none;will-change:transform,opacity';
+        }
+        
+        // Position globe and ring
         var leftPos = Math.round(78 - t * 3);
         container.style.left = leftPos + '%';
         container.style.top = '50%';
@@ -627,9 +638,11 @@ if (window.innerWidth <= 767) {
           ringContainer.style.left = leftPos + '%';
           ringContainer.style.top = '50%';
           ringContainer.style.opacity = '0.6';
+          ringContainer.style.display = 'block';
         }
       }
       
+      _lastMode = currentMode;
       return { cols: cols, rows: rows };
     }
     var heroSize = updateHeroGlobeSize();
