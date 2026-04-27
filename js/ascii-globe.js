@@ -587,7 +587,7 @@ if (window.innerWidth <= 767) {
         if (cta) cta.after(container);
         
         // Style globe container
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:30px auto 20px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:200px;height:200px;border-radius:50%';
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:20px auto 10px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:260px;height:220px';
         
         // Show ring inside globe container on mobile
         if (ringContainer) {
@@ -603,8 +603,8 @@ if (window.innerWidth <= 767) {
               var rw = ringPreEl.offsetWidth;
               var rh = ringPreEl.offsetHeight;
               ringPreEl.style.position = 'relative';
-              ringPreEl.style.left = Math.round((200 - rw) / 2) + 'px';
-              ringPreEl.style.top = Math.round((200 - rh) / 2) + 'px';
+              ringPreEl.style.left = Math.round((260 - rw) / 2) + 'px';
+              ringPreEl.style.top = Math.round((220 - rh) / 2) + 'px';
             }
           }, 600);
         }
@@ -616,8 +616,8 @@ if (window.innerWidth <= 767) {
           var pw = pre.offsetWidth;
           var ph = pre.offsetHeight;
           pre.style.position = 'relative';
-          pre.style.left = Math.round((200 - pw) / 2) + 'px';
-          pre.style.top = Math.round((200 - ph) / 2 - 14) + 'px';
+          pre.style.left = Math.round((260 - pw) / 2) + 'px';
+          pre.style.top = Math.round((220 - ph) / 2 - 10) + 'px';
         }, 500);
         
       } else {
