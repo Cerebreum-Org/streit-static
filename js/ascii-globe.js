@@ -565,8 +565,8 @@ if (window.innerWidth <= 767) {
       
       // Calculate sizing
       var t = Math.max(0, Math.min(1, (vw - 375) / (1920 - 375)));
-      var targetWidth = isMobile ? 180 : vw * 0.40;
-      var fontSize = isMobile ? 4 : Math.max(6, Math.round(vw / 192));
+      var targetWidth = isMobile ? 280 : vw * 0.40;
+      var fontSize = isMobile ? 5 : Math.max(6, Math.round(vw / 192));
       var cols = Math.round(targetWidth / (fontSize * 0.6));
       var rows = Math.round(cols * 0.42);
       
@@ -587,7 +587,7 @@ if (window.innerWidth <= 767) {
         if (cta) cta.after(container);
         
         // Style globe container
-        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:20px auto 10px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:260px;height:220px';
+        container.style.cssText = 'position:relative;left:auto;top:auto;transform:none;margin:15px auto 10px auto;opacity:0.5;display:block;pointer-events:none;overflow:hidden;width:320px;height:280px';
         
         // Show ring inside globe container on mobile
         if (ringContainer) {
@@ -603,8 +603,8 @@ if (window.innerWidth <= 767) {
               var rw = ringPreEl.offsetWidth;
               var rh = ringPreEl.offsetHeight;
               ringPreEl.style.position = 'relative';
-              ringPreEl.style.left = Math.round((260 - rw) / 2) + 'px';
-              ringPreEl.style.top = Math.round((220 - rh) / 2) + 'px';
+              ringPreEl.style.left = Math.round((320 - rw) / 2) + 'px';
+              ringPreEl.style.top = Math.round((280 - rh) / 2) + 'px';
             }
           }, 600);
         }
@@ -616,8 +616,8 @@ if (window.innerWidth <= 767) {
           var pw = pre.offsetWidth;
           var ph = pre.offsetHeight;
           pre.style.position = 'relative';
-          pre.style.left = Math.round((260 - pw) / 2) + 'px';
-          pre.style.top = Math.round((220 - ph) / 2 - 10) + 'px';
+          pre.style.left = Math.round((320 - pw) / 2) + 'px';
+          pre.style.top = Math.round((280 - ph) / 2 - 10) + 'px';
         }, 500);
         
       } else {
