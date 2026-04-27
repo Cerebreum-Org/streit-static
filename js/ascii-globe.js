@@ -2,26 +2,7 @@
 // Inject hamburger CSS fix
 (function(){ var s=document.createElement('style'); s.textContent='.sc-hamburger{background:transparent!important;border:none!important}'; document.head.appendChild(s); })();
 
-// Final mobile override - element is hidden via CSS until positioned
-if (window.innerWidth <= 767) {
-  var mfTimer = setInterval(function() {
-    var c = document.getElementById('ascii-globe-hero');
-    var cta = document.querySelector('.sc-hero-cta');
-    if (!c || !cta || !c.querySelector('pre')) return;
-    clearInterval(mfTimer);
-    // Move into content flow after CTA
-    cta.after(c);
-    // Position and show in one frame
-    c.style.cssText = 'position:relative;left:50%;top:auto;transform:translateX(-50%);margin:-10px 0 -220px 0;opacity:0.5;display:block!important';
-    // Also fix ring
-    var ring = document.getElementById('ascii-ring-hero');
-    // ring hidden via CSS media query on mobile
-    // Fix gradient
-    var grad = document.querySelector('[class*="inline-div-0-1-2-3-4-5"]');
-    if (grad) grad.style.bottom = '35%';
-  }, 300);
-  setTimeout(function(){ clearInterval(mfTimer); }, 15000);
-}
+// Mobile handling moved to updateHeroGlobeSize state machine
 
 // ASCII Globe — rotating Earth with dense neon-glow characters
 // Vibrant cyberpunk palette: cyan oceans, lime/yellow land, white highlights
